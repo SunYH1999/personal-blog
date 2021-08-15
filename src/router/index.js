@@ -1,26 +1,32 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Index from './views/Index.vue'
-
-Vue.use(Router)
-
-export default new Router({
-    routes: [
-        {
-            path: '/',
-            name: 'index',
-            component: Index
+import {createRouter, createWebHistory} from 'vue-router'
+ 
+const routerHistory = createWebHistory()
+ 
+const router = createRouter({// eslint-disable-line no-unused-vars
+    history: routerHistory,
+     routes: [{
+        path: '/',
+        component: resolve => require(['../views/home'], resolve),
+        meta: {
+            auth: true
         },
-        {
-            path: '/home',
-            name: 'home',
-            component: () => import('./views/home')
-        }
-        ,
-        {
-            path: '/passage',
-            name: 'passage',
-            component: () => import('./views/passage')
-        }
-    ]
+        name: 'Home'
+    },
+    {
+        path: '/Home',
+        component: resolve => require(['../views/home'], resolve),
+        meta: {
+            auth: true
+        },
+        name: 'Home'
+    },
+    {
+        path: '/Passage',
+        component: resolve => require(['../views/passage'], resolve),
+        meta: {
+            auth: true
+        },
+        name: 'Passage'
+    }
+  ]
 })
